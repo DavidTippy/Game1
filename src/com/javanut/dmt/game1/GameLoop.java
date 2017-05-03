@@ -12,9 +12,13 @@ public class GameLoop implements Runnable{
 	private int FPS = 45;
 	private long targetTime = 1_000_000_000/FPS;
 	
-	public GameLoop() {
+	GamePanel gp = new GamePanel();
+	GameStateManager gsm = new GameStateManager();
+	
+	public GameLoop(GamePanel gp, GameStateManager gsm) {
 		
-		
+		this.gp = gp;
+		this.gsm = gsm;
 		
 	}
 	
@@ -35,6 +39,7 @@ public class GameLoop implements Runnable{
 			start = System.nanoTime();
 			
 			tick();
+			
 			
 			elapsed = System.nanoTime() - start;
 			wait = targetTime - elapsed;
@@ -59,6 +64,12 @@ public class GameLoop implements Runnable{
 	public void tick() {
 		
 		System.out.println("Running");
+		gsm.tick();
+	}
+	
+	public void draw() {
+		
+		gsm.draw(g);
 		
 	}
 	
