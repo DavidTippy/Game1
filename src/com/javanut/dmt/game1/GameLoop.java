@@ -8,9 +8,15 @@ public class GameLoop implements Runnable{
 	
 	private Thread thread;
 	private boolean isRunning = false;
-	
+	private Graphics g;
 	private int FPS = 45;
 	private long targetTime = 1_000_000_000/FPS;
+	
+	public GameLoop() {
+		
+		
+		
+	}
 	
 	public void start() {
 		
@@ -55,5 +61,7 @@ public class GameLoop implements Runnable{
 		System.out.println("Running");
 		
 	}
+	
+
 
 }

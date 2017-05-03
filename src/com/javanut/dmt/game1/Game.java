@@ -18,6 +18,9 @@ public class Game {
 		window.setLocationRelativeTo(null);
 		window.setVisible(true); 
 		
+		GameLoop myGameLoop = new GameLoop();
+		myGameLoop.start();
+		
 	}
 
 }

@@ -11,8 +11,9 @@ public class GamePanel extends JPanel {
 	//dimensions
 	public static final int WIDTH = 512;
 	public static final int HEIGHT = 448;
+	private Graphics g;
 	
-	GameLoop myGameLoop = new GameLoop();
+	
 	
 	public GamePanel() {
 		
@@ -21,8 +22,14 @@ public class GamePanel extends JPanel {
 		setFocusable(true);
 		requestFocus();
 		
-		myGameLoop.start();
+		
+		
 	}
 	
+	public void paintComponent() {
+		
+		super.paintComponent(g);
+		
+	}
 
 }
