@@ -10,19 +10,14 @@ public class GamePanel extends JPanel {
 	
 	//dimensions
 	public static final int WIDTH = 512;
-	public static final int HEIGHT = 448;
-	private Graphics g;
-	
-	
+	public static final int HEIGHT = 448;	
 	
 	public GamePanel() {
 		
 		super();
 		setPreferredSize(new Dimension(WIDTH,HEIGHT));
 		setFocusable(true);
-		requestFocus();
-		
-		
+		requestFocus();			
 		
 	}
 	

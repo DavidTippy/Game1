@@ -1,10 +1,11 @@
 package com.javanut.dmt.game1;
 
 import java.awt.Graphics;
-import javax.swing.JPanel;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 // class for the game loop
-public class GameLoop implements Runnable{
+public class GameLoop implements Runnable, KeyListener{
 	
 	private Thread thread;
 	private boolean isRunning = false;
@@ -39,7 +40,7 @@ public class GameLoop implements Runnable{
 			start = System.nanoTime();
 			
 			tick();
-			
+			gp.repaint();
 			
 			elapsed = System.nanoTime() - start;
 			wait = targetTime - elapsed;
@@ -67,12 +68,27 @@ public class GameLoop implements Runnable{
 		gsm.tick();
 	}
 	
-	public void draw() {
+	public void draw(Graphics g) {
 		
+		g.clearRect(0, 0, gp.WIDTH, gp.HEIGHT);
 		gsm.draw(g);
 		
 	}
 	
-
+	public void keyPressed(KeyEvent e) {		
+		
+		gsm.keyPressed(e.getKeyCode());
+		
+	}
+	
+	public void keyReleased(KeyEvent e) {		
+		
+		gsm.keyReleased(e.getKeyCode());
+		
+	}
+	
+	public void keyTyped(KeyEvent e) {		
+		
+	}
 
 }

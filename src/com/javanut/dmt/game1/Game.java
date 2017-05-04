@@ -22,9 +22,7 @@ public class Game {
 		GameStateManager gsm = new GameStateManager();
 		
 		GameLoop myGameLoop = new GameLoop(myGamePanel, gsm);
-		myGameLoop.start();
-		
-		
+		myGameLoop.start();				
 		
 	}
 

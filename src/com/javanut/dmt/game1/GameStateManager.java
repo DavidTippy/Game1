@@ -10,6 +10,7 @@ public class GameStateManager {
 	public GameStateManager() {
 		
 		states = new Stack<GameState>();
+		states.push(new MenuState(this));
 		
 	}
 	
@@ -22,6 +23,14 @@ public class GameStateManager {
 	public void draw(Graphics g) {
 		
 		states.peek().draw();
+		
+	}
+	
+	public void keyPressed(int k) {
+		
+	}
+	
+	public void keyReleased(int k) {
 		
 	}
 
