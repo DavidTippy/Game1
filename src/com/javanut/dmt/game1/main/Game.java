@@ -1,9 +1,11 @@
-package com.javanut.dmt.game1;
+package com.javanut.dmt.game1.main;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
+
+import com.javanut.dmt.game1.gamestates.GameStateManager;
 
 // class that starts the game
 public class Game {

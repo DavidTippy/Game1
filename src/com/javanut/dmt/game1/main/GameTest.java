@@ -1,4 +1,4 @@
-package com.javanut.dmt.game1;
+package com.javanut.dmt.game1.main;
 
 // class to test the game
 public class GameTest {

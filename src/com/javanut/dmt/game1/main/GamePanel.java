@@ -1,4 +1,4 @@
-package com.javanut.dmt.game1;
+package com.javanut.dmt.game1.main;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.KeyListener;

@@ -1,4 +1,4 @@
-package com.javanut.dmt.game1;
+package com.javanut.dmt.game1.gamestates;
 
 public abstract class GameState {
 	

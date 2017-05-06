@@ -1,4 +1,4 @@
-package com.javanut.dmt.game1;
+package com.javanut.dmt.game1.gamestates;
 
 import java.awt.Graphics;
 import java.util.Stack;

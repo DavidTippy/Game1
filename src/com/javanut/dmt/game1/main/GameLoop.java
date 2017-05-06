@@ -1,8 +1,10 @@
-package com.javanut.dmt.game1;
+package com.javanut.dmt.game1.main;
 
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
+import com.javanut.dmt.game1.gamestates.GameStateManager;
 
 // class for the game loop
 public class GameLoop implements Runnable, KeyListener{
