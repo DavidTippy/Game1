@@ -1,30 +1,58 @@
 package com.javanut.dmt.game1.main;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.JPanel;
+
+import com.javanut.dmt.game1.gamestates.GameStateManager;
 
 // class for the Game Panel
 public class GamePanel extends JPanel {
 	
 	//dimensions
 	public static final int WIDTH = 512;
-	public static final int HEIGHT = 448;	
+	public static final int HEIGHT = 448;
 	
-	public GamePanel() {
+	GameStateManager gsm = new GameStateManager();
+	
+	public GamePanel(GameStateManager gsm) {
 		
 		super();
 		setPreferredSize(new Dimension(WIDTH,HEIGHT));
 		setFocusable(true);
-		requestFocus();			
+		requestFocus();	
+		this.gsm = gsm;
 		
 	}
+	
+public void tick() {
+		
+		System.out.println("Running");
+		gsm.tick();
+	}
+
+	
+	public void keyPressed(KeyEvent e) {		
+		
+		gsm.keyPressed(e.getKeyCode());
+		
+	}
+	
+	public void keyReleased(KeyEvent e) {		
+		
+		gsm.keyReleased(e.getKeyCode());
+		
+	}
+	
+	public void keyTyped(KeyEvent e) {}
 	
 	public void paintComponent(Graphics g) {
 		
 		super.paintComponent(g);
-		g.drawRect(100, 125, 150, 175);
+		g.clearRect(0, 0, WIDTH, HEIGHT);
+		gsm.draw(g);
 		
 	}
 

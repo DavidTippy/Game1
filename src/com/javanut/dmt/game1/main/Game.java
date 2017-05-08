@@ -12,18 +12,18 @@ public class Game {
 	
 	public static void doIt() {
 		
+		GameStateManager gsm = new GameStateManager();
+		
 		JFrame window = new JFrame("Game");
-		GamePanel myGamePanel = new GamePanel();
+		GamePanel myGamePanel = new GamePanel(gsm);
 		window.setContentPane(myGamePanel);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setResizable(false);
 		window.pack();
 		window.setLocationRelativeTo(null);
-		window.setVisible(true); 
+		window.setVisible(true); 		
 		
-		GameStateManager gsm = new GameStateManager();
-		
-		GameLoop myGameLoop = new GameLoop(myGamePanel, gsm);
+		GameLoop myGameLoop = new GameLoop(myGamePanel);
 		myGameLoop.start();				
 		
 	}
