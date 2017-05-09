@@ -32,15 +32,7 @@ public class MenuState extends GameState{
 		
 		for(int i = 0; i < options.length; i++){
 			
-			if(i == currentSelection) {
-				
-				g.setColor(Color.RED);
-				
-			} else {
-				
-				g.setColor(Color.BLACK);
-				
-			}
+			g.setColor(getColor(i));
 			
 			g.drawString(options[i], GamePanel.WIDTH / 2 - 50, 40 + i * 30);
 			
@@ -57,6 +49,20 @@ public class MenuState extends GameState{
 
 	
 	public void keyReleased(int i) {		
+		
+	}
+	
+	private Color getColor(int i) {
+		
+		if(i == currentSelection) {
+			
+			return Color.RED;
+			
+		} else {
+			
+			return Color.BLACK;
+			
+		}
 		
 	}
 
