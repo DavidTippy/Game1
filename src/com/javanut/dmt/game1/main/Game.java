@@ -24,6 +24,10 @@ public class Game {
 		window.setVisible(true); 		
 		
 		GameLoop myGameLoop = new GameLoop(myGamePanel);
+		
+		
+		
+		
 		myGameLoop.start();				
 		
 	}

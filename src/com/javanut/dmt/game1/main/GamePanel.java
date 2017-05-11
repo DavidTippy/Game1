@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import com.javanut.dmt.game1.gamestates.GameStateManager;
 
 // class for the Game Panel
-public class GamePanel extends JPanel {
+public class GamePanel extends JPanel implements KeyListener{
 	
 	//dimensions
 	public static final int WIDTH = 512;
@@ -21,13 +21,16 @@ public class GamePanel extends JPanel {
 		
 		super();
 		setPreferredSize(new Dimension(WIDTH,HEIGHT));
+		
+		addKeyListener(this);
+		
 		setFocusable(true);
 		requestFocus();	
 		this.gsm = gsm;
 		
 	}
 	
-public void tick() {
+	public void tick() {
 		
 		System.out.println("Running");
 		gsm.tick();

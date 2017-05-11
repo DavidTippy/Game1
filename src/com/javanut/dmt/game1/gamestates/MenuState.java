@@ -2,6 +2,7 @@ package com.javanut.dmt.game1.gamestates;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
 
 import com.javanut.dmt.game1.main.GamePanel;
 
@@ -43,6 +44,22 @@ public class MenuState extends GameState{
 
 	
 	public void keyPressed(int i) {		
+		
+		if(i == KeyEvent.VK_DOWN) {
+			
+			currentSelection++;			
+			if(currentSelection >= options.length) {
+				currentSelection = 0;	
+			}
+			
+		} else if(i == KeyEvent.VK_UP) {
+			
+			currentSelection--;
+			if(currentSelection < 0) {
+				currentSelection = options.length - 1;				
+			}
+			
+		}
 		
 	}
 

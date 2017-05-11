@@ -17,6 +17,7 @@ public class GameLoop implements Runnable{
 	
 	public GameLoop(GamePanel gp) {
 		
+		
 		this.gp = gp;
 		
 		
