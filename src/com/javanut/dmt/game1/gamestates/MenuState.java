@@ -1,6 +1,7 @@
 package com.javanut.dmt.game1.gamestates;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 
@@ -35,7 +36,9 @@ public class MenuState extends GameState{
 			
 			g.setColor(getColor(i));
 			
-			g.drawString(options[i], GamePanel.WIDTH / 2 - 50, 40 + i * 30);
+			
+			g.setFont(new Font("Arial", Font.PLAIN, 36));
+			g.drawString(options[i], GamePanel.WIDTH / 2 - 75, 150 + i * 50);
 			
 		}
 		
