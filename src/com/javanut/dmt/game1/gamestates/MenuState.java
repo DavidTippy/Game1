@@ -37,8 +37,8 @@ public class MenuState extends GameState{
 			g.setColor(getColor(i));
 			
 			
-			g.setFont(new Font("Arial", Font.PLAIN, 36));
-			g.drawString(options[i], GamePanel.WIDTH / 2 - 75, 150 + i * 50);
+			g.setFont(new Font("Arial", Font.PLAIN, getFontSize(i)));
+			g.drawString(options[i], GamePanel.WIDTH / 2 - 80, 150 + i * 60);
 			
 		}
 		
@@ -64,6 +64,24 @@ public class MenuState extends GameState{
 			
 		}
 		
+		if(i == KeyEvent.VK_ENTER) {
+			if(currentSelection == 0) {
+				
+				gsm.states.push(new PlayState(gsm));
+				
+			} else if(currentSelection == 1) {
+				
+				
+				
+			} else if(currentSelection == 2) {
+				
+				System.exit(0);
+				
+			}
+			
+			
+		}
+		
 	}
 
 
@@ -81,6 +99,20 @@ public class MenuState extends GameState{
 		} else {
 			
 			return Color.BLACK;
+			
+		}
+		
+	}
+	
+	private int getFontSize(int i) {
+		
+		if(i == currentSelection) {
+			
+			return 48;
+			
+		} else {
+			
+			return 36;
 			
 		}
 		
