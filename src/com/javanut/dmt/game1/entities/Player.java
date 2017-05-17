@@ -7,13 +7,20 @@ import java.awt.event.KeyEvent;
 
 import com.javanut.dmt.game1.main.GamePanel;
 
-public class Player extends Rectangle{
+public class Player {
 	
-	private boolean right = false, left = false;
+	private boolean right = false, left = false, jumping = false, falling = false;
+	
+	private double x,y;
+	private int width,height;
 	
 	public Player(int width, int height) {
 		
-		setBounds(GamePanel.WIDTH / 2, GamePanel.HEIGHT / 2, width,height);
+		x = GamePanel.WIDTH / 2;
+		y = GamePanel.HEIGHT / 2;
+		
+		this.width = width;
+		this.height = height;
 		
 	}
 	
@@ -21,13 +28,21 @@ public class Player extends Rectangle{
 		
 		if (right) {
 			
-			x++;
+			x += 3;
 			
 		}
 		
 		if (left) {
 			
-			x--;
+			x -= 3;
+			
+		}
+		
+		if(jumping) {
+			
+		}
+		
+		if(falling) {
 			
 		}
 		
@@ -36,7 +51,7 @@ public class Player extends Rectangle{
 	public void draw(Graphics g) {
 		
 		g.setColor(Color.BLACK);
-		g.fillRect(x, y, width, height);
+		g.fillRect((int)x, (int)y, width, height);
 		
 	}
 	
