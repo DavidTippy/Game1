@@ -14,6 +14,14 @@ public class Player {
 	private double x,y;
 	private int width,height;
 	
+	// jump speed
+	private double jumpSpeed = 5;
+	private double currentJumpSpeed = jumpSpeed;
+	
+	// fall speed
+	private double maxFallSpeed = 5;
+	private double currentFallSpeed = 0.1;
+	
 	public Player(int width, int height) {
 		
 		x = GamePanel.WIDTH / 2;
@@ -28,21 +36,48 @@ public class Player {
 		
 		if (right) {
 			
-			x += 3;
+			x += 1;
 			
 		}
 		
 		if (left) {
 			
-			x -= 3;
+			x -= 1;
 			
 		}
 		
 		if(jumping) {
 			
+			y -= currentJumpSpeed;
+			
+			currentJumpSpeed -= .1;
+			
+			if(currentJumpSpeed <= 0) {
+				
+				currentJumpSpeed = jumpSpeed;
+				jumping = false;
+				falling = true;
+				
+			}
+			
+			
 		}
 		
 		if(falling) {
+			
+			y += currentFallSpeed;
+			
+			if(currentFallSpeed < maxFallSpeed) {
+				
+				currentFallSpeed += .1;
+				
+			}
+			
+		}
+		
+		if(!falling) {
+			
+			currentFallSpeed = .1;
 			
 		}
 		
@@ -59,6 +94,7 @@ public class Player {
 		
 		if(i == KeyEvent.VK_RIGHT) right = true;
 		if(i == KeyEvent.VK_LEFT) left = true;
+		if(i == KeyEvent.VK_Z) jumping = true;
 		
 	}
 	
