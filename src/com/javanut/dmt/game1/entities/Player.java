@@ -102,7 +102,12 @@ public class Player {
 		
 		if(i == KeyEvent.VK_RIGHT) right = false;
 		if(i == KeyEvent.VK_LEFT) left = false;
-		
+		if(i == KeyEvent.VK_Z) {
+			
+			jumping = false;
+			falling = true;
+			
+		}
 		
 	}
 	
