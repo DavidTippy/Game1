@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 
+import com.javanut.dmt.game1.gamestates.GameState;
 import com.javanut.dmt.game1.main.GamePanel;
 
 public class Player {
@@ -36,19 +37,19 @@ public class Player {
 		
 		if (right) {
 			
-			x += 1;
+			GameState.xOffset += 1;
 			
 		}
 		
 		if (left) {
 			
-			x -= 1;
+			GameState.xOffset -= 1;
 			
 		}
 		
 		if(jumping) {
 			
-			y -= currentJumpSpeed;
+			GameState.yOffset -= currentJumpSpeed;
 			
 			currentJumpSpeed -= .1;
 			
@@ -65,7 +66,7 @@ public class Player {
 		
 		if(falling) {
 			
-			y += currentFallSpeed;
+			GameState.yOffset += currentFallSpeed;
 			
 			if(currentFallSpeed < maxFallSpeed) {
 				

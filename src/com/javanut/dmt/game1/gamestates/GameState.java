@@ -6,9 +6,15 @@ public abstract class GameState {
 	
 	protected GameStateManager gsm;
 	
+	public static double xOffset,yOffset;
+	
 	public GameState(GameStateManager gsm) {
 		
 		this.gsm = gsm;
+		
+		xOffset = 0;
+		yOffset = 0;
+		
 		init();
 		
 	}

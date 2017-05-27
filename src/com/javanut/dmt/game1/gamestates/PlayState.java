@@ -17,7 +17,7 @@ public class PlayState extends GameState{
 	
 	public void init() {
 		
-		player = new Player(30,50);
+		player = new Player(16,32);
 		
 	}
 
