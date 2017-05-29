@@ -1,4 +1,4 @@
-package com.javanut.dmt.game1.objects;
+package com.javanut.dmt.game1.solids;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
