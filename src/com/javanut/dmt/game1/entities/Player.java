@@ -2,11 +2,14 @@ package com.javanut.dmt.game1.entities;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 
 import com.javanut.dmt.game1.gamestates.GameState;
 import com.javanut.dmt.game1.main.GamePanel;
+import com.javanut.dmt.game1.physics.Collision;
+import com.javanut.dmt.game1.solids.Block;
 
 public class Player {
 	
@@ -33,7 +36,17 @@ public class Player {
 		
 	}
 	
-	public void tick() {
+	public void tick( Block[] b) {
+		
+		int iX = (int)x;
+		int iY = (int)y;
+		
+		for (int i = 0; i < b.length; i++) {
+			
+			//right
+			if (Collision.playerBlock(new Point(iX+width,iY), b[i]) || Collision.playerBlock(new Point(iX+width, iY+height),b[i]));
+			
+		}
 		
 		if (right) {
 			

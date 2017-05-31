@@ -27,14 +27,20 @@ public class Level1State extends GameState{
 		// create blocks
 		b[0] = new Block(100,100);
 		b[1] = new Block(200,200);
-		b[2] = new Block(300,300);
+		b[2] = new Block(400,400);
 		
 	}
 
 	
 	public void tick() {
 		
-		player.tick();
+		for(int i = 0; i < b.length; i++) {
+			
+			b[i].tick();
+			
+		}
+		
+		player.tick(b);
 		
 	}
 
