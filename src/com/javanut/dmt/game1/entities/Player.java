@@ -22,6 +22,9 @@ public class Player {
 	private double jumpSpeed = 5;
 	private double currentJumpSpeed = jumpSpeed;
 	
+	// move speed
+	private double moveSpeed = 2.5;
+	
 	// fall speed
 	private double maxFallSpeed = 5;
 	private double currentFallSpeed = 0.1;
@@ -44,19 +47,22 @@ public class Player {
 		for (int i = 0; i < b.length; i++) {
 			
 			//right
-			if (Collision.playerBlock(new Point(iX+width,iY), b[i]) || Collision.playerBlock(new Point(iX+width, iY+height),b[i]));
+			if (Collision.playerBlock(new Point(iX+width+(int)GameState.xOffset,iY + (int)GameState.yOffset), b[i]) 
+					|| Collision.playerBlock(new Point(iX+width+(int)GameState.xOffset, iY+height+(int)GameState.yOffset),b[i])) {
+			right = false;
 			
+			}
 		}
 		
 		if (right) {
 			
-			GameState.xOffset += 1;
+			GameState.xOffset += moveSpeed;
 			
 		}
 		
 		if (left) {
 			
-			GameState.xOffset -= 1;
+			GameState.xOffset -= moveSpeed;
 			
 		}
 		

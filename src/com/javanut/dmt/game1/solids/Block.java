@@ -17,14 +17,11 @@ public class Block extends Rectangle{
 	
 	public void tick() {
 		
-		x = x - (int)GameState.xOffset;
-		y = y - (int)GameState.yOffset;
-		
 	}
 	
 	public void draw(Graphics g) {
 		
-		g.fillRect(x, y, width, height);
+		g.fillRect(x-(int)GameState.xOffset, y-(int)GameState.yOffset, width, height);
 		
 	}
 
