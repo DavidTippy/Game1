@@ -46,11 +46,40 @@ public class Player {
 		
 		for (int i = 0; i < b.length; i++) {
 			
-			//right
+			//right collision
 			if (Collision.playerBlock(new Point(iX+width+(int)GameState.xOffset,iY + (int)GameState.yOffset), b[i]) 
 					|| Collision.playerBlock(new Point(iX+width+(int)GameState.xOffset, iY+height+(int)GameState.yOffset),b[i])) {
 			right = false;
 			
+			}
+			
+			//left collision
+			if (Collision.playerBlock(new Point(iX+(int)GameState.xOffset,iY + (int)GameState.yOffset), b[i]) 
+					|| Collision.playerBlock(new Point(iX+(int)GameState.xOffset, iY+height+(int)GameState.yOffset),b[i])) {
+			left = false;
+			
+			}
+			
+			//top collision
+			
+			if (Collision.playerBlock(new Point(iX+(int)GameState.xOffset,iY + (int)GameState.yOffset), b[i]) 
+					|| Collision.playerBlock(new Point(iX+width+(int)GameState.xOffset, iY+(int)GameState.yOffset),b[i])) {
+			jumping = false;
+			falling = true;
+			
+			}
+			
+			//bottom collision
+
+			if (Collision.playerBlock(new Point(iX+(int)GameState.xOffset,iY + height + (int)GameState.yOffset), b[i]) 
+					|| Collision.playerBlock(new Point(iX+width+(int)GameState.xOffset, iY+height+(int)GameState.yOffset),b[i])) {
+				
+			falling = false;
+			
+			} else {
+				
+				falling = true;
+				
 			}
 		}
 		
