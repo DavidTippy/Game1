@@ -67,6 +67,7 @@ public class MenuState extends GameState{
 		if(i == KeyEvent.VK_ENTER) {
 			if(currentSelection == 0) {
 				
+				// change to map state when MapState class is done
 				gsm.states.push(new Level1State(gsm));
 				
 			} else if(currentSelection == 1) {

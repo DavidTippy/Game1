@@ -48,7 +48,7 @@ public class Player {
 			
 			//right collision
 			if (Collision.playerBlock(new Point(iX+width+(int)GameState.xOffset,iY + (int)GameState.yOffset+2), b[i]) 
-					|| Collision.playerBlock(new Point(iX+width+(int)GameState.xOffset, iY+height+(int)GameState.yOffset-1),b[i])) {
+			|| Collision.playerBlock(new Point(iX+width+(int)GameState.xOffset, iY+height+(int)GameState.yOffset-1),b[i])) {
 			right = false;
 			
 			}
