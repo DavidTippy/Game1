@@ -68,7 +68,7 @@ public class MenuState extends GameState{
 			if(currentSelection == 0) {
 				
 				// change to map state when MapState class is done
-				gsm.states.push(new Level1State(gsm));
+				gsm.states.push(new MapState(gsm));
 				
 			} else if(currentSelection == 1) {
 				
