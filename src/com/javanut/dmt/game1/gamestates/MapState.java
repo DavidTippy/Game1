@@ -1,20 +1,25 @@
 package com.javanut.dmt.game1.gamestates;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
 
 import com.javanut.dmt.game1.main.GamePanel;
 
 public class MapState extends GameState{
 	
-	private final int[][] levels = {{0,0,6,0},
-									{0,0,5,0},
-									{0,3,4,0},
-									{1,2,3,4},
-									{4,3,4,0},
-									{0,4,0,0}};
+	private final int[][] levels = {{-1,-1, 6,-1},
+									{-1,-1, 5,-1},
+									{-1, 3, 4,-1},
+									{ 1, 2, 3, 4},
+									{ 4, 3, 4,-1},
+									{-1, 4,-1,-1}};
 	
-	private int[] currentSelection = {3,0};
+	private int curSelX = 0;
+	private int curSelY = 3;
+	
+	private int[] currentSelection = {curSelY,curSelX};
 	
 	private String[][] levels2 = {{" "," ","12"," "},
 								  {" "," ","11"," "},
@@ -48,7 +53,9 @@ public class MapState extends GameState{
 			
 			for(int j = 0; j < 4; j++) {
 				
-				g.setFont(new Font("Arial", Font.PLAIN, 24));
+				g.setColor(getColor(i,j));
+				
+				g.setFont(new Font("Arial", Font.PLAIN, getFontSize(i,j)));
 				g.drawString(levels2[i][j], j * 90 + 115, 30 + i * 75);
 				
 			}
@@ -57,15 +64,61 @@ public class MapState extends GameState{
 		
 	}
 
-	@Override
+	
 	public void keyPressed(int i) {
-		// TODO Auto-generated method stub
+		
+		if(i == KeyEvent.VK_DOWN) {
+			
+			curSelY++;					
+			
+		} else if(i == KeyEvent.VK_UP) {
+			
+			curSelY--;
+			
+		}else if(i == KeyEvent.VK_RIGHT) {
+			
+			curSelX++;			
+		
+			
+		} else if(i == KeyEvent.VK_LEFT) {
+			
+			curSelX--;
+			
+		}
 		
 	}
 
 	@Override
 	public void keyReleased(int i) {
 		// TODO Auto-generated method stub
+		
+	}
+	
+private Color getColor(int i,int j) {
+		
+		if(i == curSelY && j == curSelX) {
+			
+			return Color.RED;
+			
+		} else {
+			
+			return Color.BLACK;
+			
+		}
+		
+	}
+	
+	private int getFontSize(int i,int j) {
+		
+		if(i == curSelY && j == curSelX) {
+			
+			return 30;
+			
+		} else {
+			
+			return 24;
+			
+		}
 		
 	}
 
