@@ -19,14 +19,14 @@ public class Player {
 	private int width,height;
 	
 	// jump speed
-	private double jumpSpeed = 5;
+	private final double jumpSpeed = 5;
 	private double currentJumpSpeed = jumpSpeed;
 	
 	// move speed
-	private double moveSpeed = 2.5;
+	private final double moveSpeed = 2.5;
 	
 	// fall speed
-	private double maxFallSpeed = 5;
+	private final double maxFallSpeed = 5;
 	private double currentFallSpeed = 0.1;
 	
 	public Player(int width, int height) {

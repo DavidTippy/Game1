@@ -19,8 +19,6 @@ public class MapState extends GameState{
 	private int curSelX = 0;
 	private int curSelY = 3;
 	
-	private int[] currentSelection = {curSelY,curSelX};
-	
 	private String[][] levels2 = {{" "," ","12"," "},
 								  {" "," ","11"," "},
 								  {" ","9","10"," "},
@@ -69,20 +67,43 @@ public class MapState extends GameState{
 		
 		if(i == KeyEvent.VK_DOWN) {
 			
-			curSelY++;					
+			
+			if((int)(levels[curSelY+1][curSelX]) == (int)(levels[curSelY][curSelX]+1)
+					|| (int)(levels[curSelY+1][curSelX]) == (int)(levels[curSelY][curSelX]-1)){
+				
+			curSelY++;	
+			
+				}
 			
 		} else if(i == KeyEvent.VK_UP) {
 			
+			
+			if((int)(levels[curSelY-1][curSelX]) == (int)(levels[curSelY][curSelX]+1)
+					|| (int)(levels[curSelY-1][curSelX]) == (int)(levels[curSelY][curSelX]-1)){				
+			
 			curSelY--;
+			
+			}
 			
 		}else if(i == KeyEvent.VK_RIGHT) {
 			
-			curSelX++;			
+			if((int)(levels[curSelY][curSelX+1]) == (int)(levels[curSelY][curSelX]+1)
+					|| (int)(levels[curSelY][curSelX+1]) == (int)(levels[curSelY][curSelX]-1)){	
+				
+			curSelX++;	
+			
+			}
 		
 			
 		} else if(i == KeyEvent.VK_LEFT) {
 			
+		
+			if((int)(levels[curSelY][curSelX-1]) == (int)(levels[curSelY][curSelX]+1)
+					|| (int)(levels[curSelY][curSelX-1]) == (int)(levels[curSelY][curSelX]-1)){	
+				
 			curSelX--;
+			
+		}
 			
 		}
 		
@@ -94,7 +115,7 @@ public class MapState extends GameState{
 		
 	}
 	
-private Color getColor(int i,int j) {
+	private Color getColor(int i,int j) {
 		
 		if(i == curSelY && j == curSelX) {
 			
