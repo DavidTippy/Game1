@@ -19,6 +19,8 @@ public class MapState extends GameState{
 	private int curSelX = 0;
 	private int curSelY = 3;
 	
+	private int[] currentSelection = {curSelY,curSelX};
+	
 	private String[][] levels2 = {{" "," ","12"," "},
 								  {" "," ","11"," "},
 								  {" ","9","10"," "},
@@ -105,7 +107,40 @@ public class MapState extends GameState{
 			
 		}
 			
+		} else if(i == KeyEvent.VK_ENTER) {
+			
+			switch(curSelY) {
+			
+			case 0:
+				break;
+			
+			case 1:
+				break;
+				
+			case 2:
+				break;
+				
+			case 3:
+				
+				if(curSelX == 0) {
+					
+					gsm.states.push(new Level1State(gsm));
+					
+				}
+				
+				break;
+				
+			case 4:
+				break;
+				
+			case 5:
+				break;
+			
+			}
+			
 		}
+		
+		
 		
 	}
 
