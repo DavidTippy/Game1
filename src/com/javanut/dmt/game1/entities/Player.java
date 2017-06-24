@@ -63,7 +63,7 @@ public class Player {
 			//top collision
 			
 			if (Collision.playerBlock(new Point(iX+(int)GameState.xOffset+1,iY + (int)GameState.yOffset), b[i]) 
-					|| Collision.playerBlock(new Point(iX+width+(int)GameState.xOffset-1, iY+(int)GameState.yOffset),b[i])) {
+					|| Collision.playerBlock(new Point(iX+width+(int)GameState.xOffset, iY+(int)GameState.yOffset),b[i])) {
 			jumping = false;
 			falling = true;
 			
@@ -163,6 +163,7 @@ public class Player {
 		if(i == KeyEvent.VK_LEFT) left = false;
 		if(i == KeyEvent.VK_Z) {
 			
+			currentJumpSpeed = jumpSpeed;
 			jumping = false;
 			falling = true;
 			
