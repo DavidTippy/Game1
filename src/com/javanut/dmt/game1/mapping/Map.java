@@ -1,5 +1,7 @@
 package com.javanut.dmt.game1.mapping;
 
+import java.awt.Graphics;
+
 import com.javanut.dmt.game1.solids.Block;
 
 public class Map {
@@ -17,6 +19,36 @@ public class Map {
 		this.height = height;
 		
 		blocks = new Block[height][width];
+		
+	for(int i = 0; i < blocks.length; i++) {
+			
+			for(int j = 0; j < blocks[0].length; j++) {
+				
+				blocks[i][j] = new Block(j*Block.blockSize,i*Block.blockSize);
+				
+			}
+			
+		}
+		
+	}
+	
+	public void draw(Graphics g) {
+		
+		for(int i = 0; i < blocks.length; i++) {
+			
+			for(int j = 0; j < blocks[0].length; j++) {
+				
+				blocks[i][j].draw(g);
+				
+			}
+			
+		}
+		
+	}
+	
+	public Block[][] getBlocks() {
+		
+		return blocks;
 		
 	}
 

@@ -3,13 +3,14 @@ package com.javanut.dmt.game1.gamestates;
 import java.awt.Graphics;
 
 import com.javanut.dmt.game1.entities.Player;
+import com.javanut.dmt.game1.mapping.Map;
 import com.javanut.dmt.game1.solids.Block;
 
 public class Level1State extends GameState{
 	
 	private Player player;
-	
-	private Block[] b;
+	private Map map;
+
 
 	public Level1State(GameStateManager gsm) {
 		
@@ -20,28 +21,18 @@ public class Level1State extends GameState{
 	
 	public void init() {
 		
-		player = new Player(16,32);
+		player = new Player(16,32);		
+		map = new Map("",4,4);
 		
-		b = new Block[3];
-		
-		// create blocks
-		b[0] = new Block(300,300);
-		b[1] = new Block(200,200);
-		b[2] = new Block(300,400);
-		
+		xOffset = -200;
+		yOffset = -400;
 		
 	}
 
 	
 	public void tick() {
-		
-		for(int i = 0; i < b.length; i++) {
-			
-			b[i].tick();
-			
-		}
-		
-		player.tick(b);
+				
+		player.tick(map.getBlocks());
 		
 	}
 
@@ -49,12 +40,7 @@ public class Level1State extends GameState{
 	public void draw(Graphics g) {
 		
 		player.draw(g);
-		
-		for(int i = 0; i < b.length; i++) {
-			
-			b[i].draw(g);
-			
-		}
+		map.draw(g);
 		
 	}
 
