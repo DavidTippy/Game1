@@ -9,9 +9,12 @@ public class Block extends Rectangle{
 	
 	public static final int blockSize = 32;
 	
-	public Block(int x, int y) {
+	private int id;
+	
+	public Block(int x, int y, int id) {
 		
 		setBounds(x,y,blockSize,blockSize);
+		this.id = id;
 		
 	}
 	
@@ -21,7 +24,9 @@ public class Block extends Rectangle{
 	
 	public void draw(Graphics g) {
 		
+		if(id != 0) {
 		g.fillRect(x-(int)GameState.xOffset, y-(int)GameState.yOffset, width, height);
+		}
 		
 	}
 
