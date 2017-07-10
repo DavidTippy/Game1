@@ -29,5 +29,17 @@ public class Block extends Rectangle{
 		}
 		
 	}
+	
+	public void setID(int id) {
+		
+		this.id = id;
+		
+	}
+	
+	public int getID() {
+		
+		return id;
+		
+	}
 
 }
