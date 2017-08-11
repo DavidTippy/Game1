@@ -21,11 +21,11 @@ public class Level1State extends GameState{
 	
 	public void init() {
 		
-		player = new Player(16,32);		
+		player = new Player();		
 		map = new Map("/map1.map");
 		
-		xOffset = -200;
-		yOffset = -400;
+		xOffset = -224;
+		yOffset = -200;
 		
 	}
 

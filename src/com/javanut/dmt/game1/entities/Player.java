@@ -14,28 +14,26 @@ import com.javanut.dmt.game1.solids.Block;
 public class Player {
 	
 	private boolean right = false, left = false, jumping = false, falling = false, topCollision = false;
+	private boolean rightHeld = false, leftHeld = false;
 	
-	private double x,y;
-	private int width,height;
+	public double x,y;
+	public int width = 16,height = 32;
 	
 	// jump speed
 	private final double jumpSpeed = 8;
 	private double currentJumpSpeed = jumpSpeed;
 	
 	// move speed
-	private final double moveSpeed = 2.5;
+	private final double moveSpeed = 2;
 	
 	// fall speed
 	private final double maxFallSpeed = 10;
 	private double currentFallSpeed = 0.2;
 	
-	public Player(int width, int height) {
+	public Player() {
 		
 		x = GamePanel.WIDTH / 2;
 		y = GamePanel.HEIGHT / 2;
-		
-		this.width = width;
-		this.height = height;
 		
 	}
 	
@@ -44,65 +42,90 @@ public class Player {
 		int iX = (int)x;
 		int iY = (int)y;
 		
-		for (int i = 0; i < b.length; i++) {
-			for (int j = 0; j < b[0].length; j++) {
-			
-			if(b[i][j].getID() != 0) {
-				
-			//right collision
-			if (Collision.playerBlock(new Point(iX+width+(int)GameState.xOffset,iY + (int)GameState.yOffset+2), b[i][j]) 
-			|| Collision.playerBlock(new Point(iX+width+(int)GameState.xOffset, iY+height+(int)GameState.yOffset-1),b[i][j])) {
-			right = false;
-			
-			}
-			
-			//left collision
-			if (Collision.playerBlock(new Point(iX+(int)GameState.xOffset-1,iY + (int)GameState.yOffset+2), b[i][j]) 
-					|| Collision.playerBlock(new Point(iX+(int)GameState.xOffset-1, iY+height+(int)GameState.yOffset-1),b[i][j])) {
-			left = false;
-			
-			}
-			
-			//top collision
-			
-			if (Collision.playerBlock(new Point(iX+(int)GameState.xOffset+1,iY + (int)GameState.yOffset), b[i][j]) 
-					|| Collision.playerBlock(new Point(iX+width+(int)GameState.xOffset-2, iY+(int)GameState.yOffset),b[i][j])) {
-			jumping = false;
-			falling = true;
-			
-			}
-			
-			//bottom collision
-
-			if (Collision.playerBlock(new Point(iX+(int)GameState.xOffset+2,iY + height + (int)GameState.yOffset+1), b[i][j]) 
-					|| Collision.playerBlock(new Point(iX+width+(int)GameState.xOffset-2, iY+height+(int)GameState.yOffset+1),b[i][j])) {
-				
-			y = b[i][j].getY() - height - GameState.yOffset;
-				
-			falling = false;
-			
-			topCollision = true;
-			
-			} else {
-				
+		//TODO: find exact which block player is in
+		
+		int iLeft = (int)((x+GameState.xOffset)/Block.blockSize);
+		int iMiddle = (int)(((x+width/2)+GameState.xOffset)/Block.blockSize);
+		int iRight = (int)(((x+width)+GameState.xOffset)/Block.blockSize);
+		
+		int jTop = (int)((y+GameState.yOffset)/Block.blockSize);
+		int jMiddle = (int)((((y + height/2)+GameState.yOffset)/Block.blockSize));
+		int jBottom = (int)(((y+height)+GameState.yOffset)/Block.blockSize);
+		
+		
+		if(iMiddle >= 0 && jBottom >= 0 && jBottom < b.length && iMiddle<b[jBottom].length) {
+		
+		if(b[jBottom][iMiddle].getID() != 0){falling = false; topCollision = true;
+		System.out.println(iMiddle + " " + jBottom);}
+		
+		}
+		
+		//TODO: check b[xBlock-1][yBlock] etc etc etc all directions.
+		//      set the booleans 
+		
+		
+//		for (int i = 0; i < b.length; i++) {
+//			for (int j = 0; j < b[i].length; j++) {
+//			
+//			if(b[i][j].getID() != 0) {
+//				
+//			//right collision
+//			if (Collision.playerBlock(new Point(iX+width+(int)GameState.xOffset,iY + (int)GameState.yOffset+2), b[i][j]) 
+//			|| Collision.playerBlock(new Point(iX+width+(int)GameState.xOffset, iY+height+(int)GameState.yOffset-1),b[i][j])) {
+//			right = false; 
+//			
+//			} else if(rightHeld){right = true;}
+//			
+//			//left collision
+//			if (Collision.playerBlock(new Point(iX+(int)GameState.xOffset-1,iY + (int)GameState.yOffset+2), b[i][j]) 
+//					|| Collision.playerBlock(new Point(iX+(int)GameState.xOffset-1, iY+height+(int)GameState.yOffset-1),b[i][j])) {
+//			left = false; 
+//			
+//			} else if(leftHeld){left = true;}
+//			
+//			//top collision
+//			
+//			if (Collision.playerBlock(new Point(iX+(int)GameState.xOffset+1,iY + (int)GameState.yOffset+4), b[i][j]) 
+//					|| Collision.playerBlock(new Point(iX+width+(int)GameState.xOffset-2, iY+(int)GameState.yOffset),b[i][j])) {
+//			jumping = false;
+//			falling = true;
+//			
+//			}
+//			
+//			//bottom collision
+//
+//			if (Collision.playerBlock(new Point(iX+(int)GameState.xOffset+2,iY + height + (int)GameState.yOffset+1), b[i][j]) 
+//					|| Collision.playerBlock(new Point(iX+width+(int)GameState.xOffset-2, iY+height+(int)GameState.yOffset+1),b[i][j])) {
+//				
+//			y = b[i][j].getY() - height - GameState.yOffset;
+//				
+//			falling = false;
+//			
+//			topCollision = true;
+//			
+//			} else {
+//				
 				if(!topCollision && !jumping) {
 					
 					falling = true;
 					
+
 				}					
-				
-			}
-			
-			}
-			
-			}
-		}
+//				
+//			}
+//			
+//			}
+//			
+//		
+//			
+//			}
+//		}
 		
 		topCollision = false;
 		
-		if (right) {
+		if (right) {						
 			
-			GameState.xOffset += moveSpeed;
+			GameState.xOffset += moveSpeed;			
 			
 		}
 		
@@ -147,6 +170,8 @@ public class Player {
 			
 		}
 		
+	
+		
 	}
  
 	public void draw(Graphics g) {
@@ -158,16 +183,16 @@ public class Player {
 	
 	public void keyPressed(int i) {
 		
-		if(i == KeyEvent.VK_RIGHT) right = true;
-		if(i == KeyEvent.VK_LEFT) left = true;
+		if(i == KeyEvent.VK_RIGHT) {right = true;}
+		if(i == KeyEvent.VK_LEFT) {left = true;}
 		if(i == KeyEvent.VK_Z && !jumping && !falling) jumping = true;
 		
 	}
 	
 	public void keyReleased(int i){
 		
-		if(i == KeyEvent.VK_RIGHT) right = false;
-		if(i == KeyEvent.VK_LEFT) left = false;
+		if(i == KeyEvent.VK_RIGHT) {rightHeld = false; right = false;}
+		if(i == KeyEvent.VK_LEFT) {leftHeld = false; left = false;}
 		if(i == KeyEvent.VK_Z) {
 			
 			currentJumpSpeed = jumpSpeed;
@@ -176,6 +201,6 @@ public class Player {
 			
 		}
 		
-	}
+	} 
 	
 }
