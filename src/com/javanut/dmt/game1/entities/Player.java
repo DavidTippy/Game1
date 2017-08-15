@@ -13,11 +13,11 @@ import com.javanut.dmt.game1.solids.Block;
 
 public class Player {
 	
-	private boolean right = false, left = false, jumping = false, falling = false, topCollision = false;
+	private boolean right = false, left = false, jumping = false, falling = false, bottomCollision = false;
 	private boolean rightHeld = false, leftHeld = false;
 	
 	public double x,y;
-	public int width = 16,height = 32;
+	public int width = 32,height = 64;
 	
 	// jump speed
 	private final double jumpSpeed = 8;
@@ -39,6 +39,18 @@ public class Player {
 	
 	public void tick( Block[][] b) {
 		
+		if(leftHeld) {
+			
+			left=true;
+			
+		}else {left=false;}
+		
+		if(rightHeld){
+			
+			right = true;
+			
+		}else{right = false;}
+		
 		int iX = (int)x;
 		int iY = (int)y;
 		
@@ -52,76 +64,38 @@ public class Player {
 		int jMiddle = (int)((((y + height/2)+GameState.yOffset)/Block.blockSize));
 		int jBottom = (int)(((y+height)+GameState.yOffset)/Block.blockSize);
 		
-		
+		// bottom collision
 		if(iMiddle >= 0 && jBottom >= 0 && jBottom < b.length && iMiddle<b[jBottom].length) {
 		
-		if(b[jBottom][iMiddle].getID() != 0){falling = false; topCollision = true;
+		if(b[jBottom][iMiddle].getID() != 0){falling = false; bottomCollision = true;
 		System.out.println(iMiddle + " " + jBottom);}
 		
+		// top collision
+		}if(iMiddle >= 0 && jTop >= 0 && jTop < b.length && iMiddle<b[jTop].length) {
+		
+		if(b[jTop][iMiddle].getID() != 0) {jumping = false; falling = true;}
+		
+		// left collision
+		}if(iLeft >= 0 && jMiddle >= 0 && jMiddle < b.length && iLeft<b[jMiddle].length) {
+			
+			if(b[jMiddle][iLeft].getID() != 0){left = false;}
+			
+		// right collision	
 		}
-		
-		//TODO: check b[xBlock-1][yBlock] etc etc etc all directions.
-		//      set the booleans 
-		
-		
-//		for (int i = 0; i < b.length; i++) {
-//			for (int j = 0; j < b[i].length; j++) {
-//			
-//			if(b[i][j].getID() != 0) {
-//				
-//			//right collision
-//			if (Collision.playerBlock(new Point(iX+width+(int)GameState.xOffset,iY + (int)GameState.yOffset+2), b[i][j]) 
-//			|| Collision.playerBlock(new Point(iX+width+(int)GameState.xOffset, iY+height+(int)GameState.yOffset-1),b[i][j])) {
-//			right = false; 
-//			
-//			} else if(rightHeld){right = true;}
-//			
-//			//left collision
-//			if (Collision.playerBlock(new Point(iX+(int)GameState.xOffset-1,iY + (int)GameState.yOffset+2), b[i][j]) 
-//					|| Collision.playerBlock(new Point(iX+(int)GameState.xOffset-1, iY+height+(int)GameState.yOffset-1),b[i][j])) {
-//			left = false; 
-//			
-//			} else if(leftHeld){left = true;}
-//			
-//			//top collision
-//			
-//			if (Collision.playerBlock(new Point(iX+(int)GameState.xOffset+1,iY + (int)GameState.yOffset+4), b[i][j]) 
-//					|| Collision.playerBlock(new Point(iX+width+(int)GameState.xOffset-2, iY+(int)GameState.yOffset),b[i][j])) {
-//			jumping = false;
-//			falling = true;
-//			
-//			}
-//			
-//			//bottom collision
-//
-//			if (Collision.playerBlock(new Point(iX+(int)GameState.xOffset+2,iY + height + (int)GameState.yOffset+1), b[i][j]) 
-//					|| Collision.playerBlock(new Point(iX+width+(int)GameState.xOffset-2, iY+height+(int)GameState.yOffset+1),b[i][j])) {
-//				
-//			y = b[i][j].getY() - height - GameState.yOffset;
-//				
-//			falling = false;
-//			
-//			topCollision = true;
-//			
-//			} else {
-//				
-				if(!topCollision && !jumping) {
+		if(iRight >= 0 &&  jMiddle >= 0 && jMiddle < b.length && iRight < b[jMiddle].length) {
+			
+			if(b[jMiddle][iRight].getID() != 0){right = false;}
+			
+		}
+
+				if(!bottomCollision && !jumping) {
 					
 					falling = true;
 					
 
 				}					
-//				
-//			}
-//			
-//			}
-//			
-//		
-//			
-//			}
-//		}
 		
-		topCollision = false;
+		bottomCollision = false;
 		
 		if (right) {						
 			
@@ -147,8 +121,7 @@ public class Player {
 				jumping = false;
 				falling = true;
 				
-			}
-			
+			}			
 			
 		}
 		
@@ -168,9 +141,7 @@ public class Player {
 			
 			currentFallSpeed = .2;
 			
-		}
-		
-	
+		}		
 		
 	}
  
@@ -183,16 +154,16 @@ public class Player {
 	
 	public void keyPressed(int i) {
 		
-		if(i == KeyEvent.VK_RIGHT) {right = true;}
-		if(i == KeyEvent.VK_LEFT) {left = true;}
+		if(i == KeyEvent.VK_RIGHT) {rightHeld = true;}
+		if(i == KeyEvent.VK_LEFT) {leftHeld = true;}
 		if(i == KeyEvent.VK_Z && !jumping && !falling) jumping = true;
 		
 	}
 	
 	public void keyReleased(int i){
 		
-		if(i == KeyEvent.VK_RIGHT) {rightHeld = false; right = false;}
-		if(i == KeyEvent.VK_LEFT) {leftHeld = false; left = false;}
+		if(i == KeyEvent.VK_RIGHT) {rightHeld = false; }
+		if(i == KeyEvent.VK_LEFT) {leftHeld = false; }
 		if(i == KeyEvent.VK_Z) {
 			
 			currentJumpSpeed = jumpSpeed;
