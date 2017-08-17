@@ -24,7 +24,7 @@ public class Player {
 	private double currentJumpSpeed = jumpSpeed;
 	
 	// move speed
-	private final double moveSpeed = 2;
+	private final double moveSpeed = 4;
 	
 	// fall speed
 	private final double maxFallSpeed = 10;
@@ -56,37 +56,78 @@ public class Player {
 		
 		//TODO: find exact which block player is in
 		
-		int iLeft = (int)((x+GameState.xOffset)/Block.blockSize);
+		int iLeft = (int)((x+GameState.xOffset-1)/Block.blockSize);
+		int iMiddleLeft = (int)(((x+width/8)+GameState.xOffset)/Block.blockSize);
 		int iMiddle = (int)(((x+width/2)+GameState.xOffset)/Block.blockSize);
-		int iRight = (int)(((x+width)+GameState.xOffset)/Block.blockSize);
+		int iMiddleRight = (int)(((x+width/1.1)+GameState.xOffset)/Block.blockSize);
+		int iRight = (int)(((x+width)+GameState.xOffset+1)/Block.blockSize);
 		
 		int jTop = (int)((y+GameState.yOffset)/Block.blockSize);
-		int jMiddle = (int)((((y + height/2)+GameState.yOffset)/Block.blockSize));
-		int jBottom = (int)(((y+height)+GameState.yOffset)/Block.blockSize);
+		int jMiddleTop =(int)(((y+height/7.5)+GameState.yOffset)/Block.blockSize);
+		int jMiddle = (int)(((y + height/2)+GameState.yOffset)/Block.blockSize);
+		int jMiddleBottom = (int)(((y+height/1.1)+GameState.yOffset)/Block.blockSize);
+		int jBottom = (int)(((y+height+2)+GameState.yOffset)/Block.blockSize);
 		
 		// bottom collision
 		if(iMiddle >= 0 && jBottom >= 0 && jBottom < b.length && iMiddle<b[jBottom].length) {
 		
-		if(b[jBottom][iMiddle].getID() != 0){falling = false; bottomCollision = true;
-		System.out.println(iMiddle + " " + jBottom);}
+			if(b[jBottom][iMiddle].getID() != 0){falling = false; bottomCollision = true;}}
+		
+		// bottom left collision
+		if(iMiddleLeft >= 0 && jBottom >= 0 && jBottom < b.length && iMiddleLeft<b[jBottom].length) {
+				
+			if(b[jBottom][iMiddleLeft].getID() != 0){falling = false; bottomCollision = true;}}
+				
+		// bottom right collision
+		if(iMiddleRight >= 0 && jBottom >= 0 && jBottom < b.length && iMiddleRight<b[jBottom].length) {
+				
+			if(b[jBottom][iMiddleRight].getID() != 0){falling = false; bottomCollision = true;}}
 		
 		// top collision
-		}if(iMiddle >= 0 && jTop >= 0 && jTop < b.length && iMiddle<b[jTop].length) {
+		if(iMiddle >= 0 && jTop >= 0 && jTop < b.length && iMiddle<b[jTop].length) {
 		
-		if(b[jTop][iMiddle].getID() != 0) {jumping = false; falling = true;}
+			if(b[jTop][iMiddle].getID() != 0) {jumping = false; falling = true;}}
+		
+		// top left collision
+		if(iMiddleLeft >= 0 && jTop >= 0 && jTop < b.length && iMiddleLeft<b[jTop].length) {
+		
+			if(b[jTop][iMiddleLeft].getID() != 0) {jumping = false; falling = true;}}
+		
+		// top right collision
+		if(iMiddleRight >= 0 && jTop >= 0 && jTop < b.length && iMiddleRight<b[jTop].length) {
+		
+			if(b[jTop][iMiddleRight].getID() != 0) {jumping = false; falling = true;}}
 		
 		// left collision
-		}if(iLeft >= 0 && jMiddle >= 0 && jMiddle < b.length && iLeft<b[jMiddle].length) {
+		if(iLeft >= 0 && jMiddle >= 0 && jMiddle < b.length && iLeft<b[jMiddle].length) {
 			
-			if(b[jMiddle][iLeft].getID() != 0){left = false;}
+			if(b[jMiddle][iLeft].getID() != 0){left = false;}}
+		
+		// left bottom collision
+		
+		if(iLeft >= 0 && jMiddleBottom >= 0 && jMiddleBottom < b.length && iLeft<b[jMiddleBottom].length) {
 			
-		// right collision	
-		}
+			if(b[jMiddleBottom][iLeft].getID() != 0){left = false;}}
+		
+		// left top collision
+		if(iLeft >= 0 && jMiddleTop >= 0 && jMiddleTop < b.length && iLeft<b[jMiddleTop].length) {
+					
+			if(b[jMiddleTop][iLeft].getID() != 0){left = false;}}
+			
+		// right collision
 		if(iRight >= 0 &&  jMiddle >= 0 && jMiddle < b.length && iRight < b[jMiddle].length) {
 			
-			if(b[jMiddle][iRight].getID() != 0){right = false;}
-			
-		}
+			if(b[jMiddle][iRight].getID() != 0){right = false;}}	
+		
+		// right bottom collision
+		if(iRight >= 0 &&  jMiddleBottom >= 0 && jMiddleBottom < b.length && iRight < b[jMiddleBottom].length) {
+					
+			if(b[jMiddleBottom][iRight].getID() != 0){right = false;}}
+				
+		// right top collision
+		if(iRight >= 0 &&  jMiddleTop >= 0 && jMiddleTop < b.length && iRight < b[jMiddleTop].length) {
+					
+			if(b[jMiddleTop][iRight].getID() != 0){right = false;}}
 
 				if(!bottomCollision && !jumping) {
 					
@@ -141,9 +182,11 @@ public class Player {
 			
 			currentFallSpeed = .2;
 			
-		}		
+		}	
 		
 	}
+		
+	
  
 	public void draw(Graphics g) {
 		
