@@ -1,6 +1,7 @@
 package com.javanut.dmt.game1.gamestates;
 
 import java.awt.Graphics;
+import java.io.File;
 
 import com.javanut.dmt.game1.entities.Player;
 import com.javanut.dmt.game1.mapping.Map;
@@ -22,7 +23,7 @@ public class Level1State extends GameState{
 	public void init() {
 		
 		player = new Player();		
-		map = new Map("/map1.map");
+		map = new Map("."+File.separator+"map1.map");
 		
 		xOffset = -224;
 		yOffset = -200;
