@@ -41,23 +41,24 @@ public class Map {
 		
 		try {
 			
+			Random myRandom = new Random();
+			RoomGenerator rg = new RoomGenerator();
 			FileWriter fw = new FileWriter(path, false);
 			PrintWriter pw = new PrintWriter(fw);
-			pw.printf("256\n256\n");
+			pw.printf("36\n12\n");				
 			
-			for(int h = 1; h<=256;h++){
-			pw.printf("0 ");
-			}pw.printf("\n");
+			int[][] Room1 = rg.generateRoom(2, 2);
+			int[][] Room2 = rg.generateRoom(8, 2);
+			int[][] Room3 = rg.generateRoom(9, 2);
 			
-			
-			for(int i = 1; i < 256; i++) {
+			for(int i = 1;i<=12;i++) {
 				
-				pw.printf("0 ");
-				
-				for(int j = 1; j<256;j++) {
-				
-				pw.printf("1 ");
-				
+				for(int j = 1; j<=12;j++){
+					
+					pw.print(Room1[i][j]+" ");
+					pw.print(Room2[i][j]+" ");
+					pw.print(Room3[i][j]+" ");
+					
 				}
 				
 				pw.printf("\n");
@@ -65,6 +66,8 @@ public class Map {
 			}
 			
 			pw.close();
+			
+			
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

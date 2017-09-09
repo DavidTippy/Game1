@@ -12,8 +12,8 @@ import com.javanut.dmt.game1.gamestates.GameStateManager;
 public class GamePanel extends JPanel implements KeyListener{
 	
 	//dimensions
-	public static final int WIDTH = 512;
-	public static final int HEIGHT = 448;
+	public static final int WIDTH = 768;
+	public static final int HEIGHT = 512;
 	
 	GameStateManager gsm = new GameStateManager();
 	

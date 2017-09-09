@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 
 import com.javanut.dmt.game1.gamestates.GameState;
 import com.javanut.dmt.game1.main.GamePanel;
+import com.javanut.dmt.game1.mapping.MapGenerator;
 import com.javanut.dmt.game1.physics.Collision;
 import com.javanut.dmt.game1.solids.Block;
 
@@ -38,6 +39,25 @@ public class Player {
 	}
 	
 	public void tick( Block[][] b) {
+		
+		int map[][];
+		
+		MapGenerator mg = new MapGenerator();
+		map = mg.generatePath();
+		
+		for(int i = 7; i>=0; i--){
+			
+			for(int j = 7;j>=0;j--){
+				
+				
+				
+				System.out.print(map[i][j]);
+				
+			}
+			
+			System.out.printf("\n");
+			
+		}
 		
 		if(leftHeld) {
 			
