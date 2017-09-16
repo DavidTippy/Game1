@@ -8,74 +8,87 @@ public class MapGenerator {
 	
 	public int[][] generatePath() {
 		
-		int[][] path = new int[8][8];
-		int currentX;
-		int currentY;
-		int XSegmentLength;
-		int YSegmentLength;
-		int XTotalLength = 0;
-		int YTotalLength = 0;
+		int[][] path = new int[6][6];
 		
-		// create start point
-		currentX = 0;
-		currentY = 0;
-		path[currentX][currentY] = 1;
+		int number1 = myRandom.nextInt(5)+1;
+		int number2 = myRandom.nextInt(6);
+		int number3 = myRandom.nextInt(6);
+		int number4 = myRandom.nextInt(6);
+		int number5 = myRandom.nextInt(5);
 		
-		int counter = 0;
+		path[0][number1] = 4;
+		path[1][number2] = 1;
+		path[2][number3] = 1;
+		path[3][number4] = 1;
+		path[4][number5] = 1;
 		
-		while(XTotalLength<7 && YTotalLength<7) {
+		for(int i = 4; i >= 0; i--){
 			
-			counter++;
-			
-			System.out.println(counter);
-			
-			XSegmentLength = myRandom.nextInt(8 - XTotalLength);
-			
-			for(int i = 0+XTotalLength; i<XTotalLength + XSegmentLength; i++){
+			for(int j = 5; j>=0; j--){
 				
-				path[i][currentY] = 1;
-				
-			}
-			
-			XTotalLength = XTotalLength + XSegmentLength;
-			currentX = currentX+XSegmentLength;
-			
-			YSegmentLength = myRandom.nextInt(8 - YTotalLength);
-			
-			for(int i = 0+YTotalLength; i<YTotalLength + YSegmentLength; i++){
-				
-				path[currentX][i] = 1;
-				
-				
-				
-			}
-			
-			YTotalLength = YTotalLength + YSegmentLength;
-			currentY = currentY+YSegmentLength;
-			
-		} 
-		
-		if(currentX == 7) {
-			
-			for(int i = currentY; i<=7; i++) {
-				
-				path[currentX][i] = 1;
+				if(path[i][j] >0){
+					path[i+1][j] = 1;
+				}
 				
 			}
 			
 		}
 		
-		if(currentY == 7) {
+		path[0][0] = 1;
+		path[5][5]=8;
+		
+		//row 1
+		for(int i = 0; i<number1;i++) {
 			
-			for(int i = currentX; i<=7; i++) {
-				
-				path[i][currentY] = 1;
-				
-			}
+			path[0][i] = 1;
 			
 		}
-		
+		//row 2
+		if(number1 > number2){
+			for(int i = number2; i < number1; i++){
+				path[1][i] = 1;
+			}
+		}else if(number2 > number1){
+			for(int i = number2;i>number1;i--){
+				path[1][i] = 1;
+			}
+		}
+		//row 3
+		if(number2 > number3){
+			for(int i = number3; i < number2; i++){
+				path[2][i] = 1;
+			}
+		}else if(number3 > number2){
+			for(int i = number3;i>number2;i--){
+				path[2][i] = 1;
+			}
+		}
+		//row 4
+		if(number3 > number4){
+			for(int i = number4; i < number3; i++){
+				path[3][i] = 1;
+			}
+		}else if(number4 > number3){
+			for(int i = number4;i>number3;i--){
+				path[3][i] = 1;
+			}
+		}
+		//row 5
+		if(number4 > number5){
+			for(int i = number5; i < number4; i++){
+				path[4][i] = 1;
+			}
+		}else if(number5 > number4){
+			for(int i = number5;i>number4;i--){
+				path[4][i] = 1;
+			}
+		}
+		//row 6
+		for(int i = number5;i<5;i++){
+			path[5][i]=1;
+		}
+			
 		return path;
 		
+		}	
 	}
-}
