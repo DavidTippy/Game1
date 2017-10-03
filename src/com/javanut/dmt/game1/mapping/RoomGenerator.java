@@ -14,27 +14,11 @@ public class RoomGenerator {
 	Random myRandom = new Random();
 	
 	
-	public int[][] generateRoom(int heightLimit, int roomType) {
+	public int[][] generateRoom(int roomType) {
 		
-		int room[][] = new int[15][15];
+		int room[][];
 		
-		switch(roomType){
-		
-		case 1:
-			
-			room = loadRoom(1);
-			
-		case 2:
-			
-		case 3:
-			
-		case 4:
-			
-		case 5:
-			
-		case 6:
-		
-		}
+	room = loadRoom(roomType);
 		
 		return room;
 		
@@ -46,7 +30,7 @@ public class RoomGenerator {
 		
 		InputStream stream;
 		
-		int room[][] = new int[15][15];
+		int room[][] = new int[16][16];
 		
 		do {
 			
@@ -55,9 +39,7 @@ public class RoomGenerator {
 		StringBuilder name = new StringBuilder();
 		name.append("Room").append(roomType).append(counter).append(".room");
 		
-		stream = getClass().getResourceAsStream(name.toString());
-		
-		
+		stream = getClass().getResourceAsStream(name.toString());		
 		
 		} while (stream != null);
 		
@@ -65,7 +47,7 @@ public class RoomGenerator {
 		int roomNumber = myRandom.nextInt(counter)+1;
 		
 		StringBuilder theRoom = new StringBuilder();
-		theRoom.append("Room").append(roomType).append(roomNumber).append(".room");
+		theRoom.append("/Room").append(roomType).append(roomNumber).append(".room");
 		
 		try{
 		

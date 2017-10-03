@@ -32,7 +32,7 @@ public class GamePanel extends JPanel implements KeyListener{
 	
 	public void tick() {
 		
-		System.out.println("Running");
+		//System.out.println("Running");
 		gsm.tick();
 	}
 

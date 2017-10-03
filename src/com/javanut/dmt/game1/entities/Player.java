@@ -40,24 +40,24 @@ public class Player {
 	
 	public void tick( Block[][] b) {
 		
-		int map[][];
+		//int map[][];
 		
-		MapGenerator mg = new MapGenerator();
-		map = mg.generatePath();
+		//MapGenerator mg = new MapGenerator();
+		//map = mg.generatePath();
 		
-		for(int i = 0; i<=5; i++){
+		//for(int i = 0; i<=5; i++){
 			
-			for(int j = 0;j<=5;j++){
+			//for(int j = 0;j<=5;j++){
 				
 				
 				
-				System.out.print(map[i][j]);
+				//System.out.print(map[i][j]);
 				
-			}
+			//}
 			
-			System.out.printf("\n");
+			//System.out.printf("\n");
 			
-		}
+		//}
 		
 		if(leftHeld) {
 			

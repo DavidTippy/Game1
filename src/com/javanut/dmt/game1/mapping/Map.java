@@ -2,6 +2,7 @@ package com.javanut.dmt.game1.mapping;
 
 import java.awt.Graphics;
 import java.io.*;
+import java.util.Arrays;
 import java.util.Random;
 
 import com.javanut.dmt.game1.solids.Block;
@@ -27,7 +28,7 @@ public class Map {
 		
 		for(int i = 0; i < blocks.length; i++) {
 			
-			for(int j = 0; j < blocks[0].length; j++) {
+			for(int j = 0; j < blocks[i].length; j++) {				
 				
 				blocks[i][j].draw(g);
 				
@@ -41,27 +42,107 @@ public class Map {
 		
 		try {
 			
+			int map[][] = new int[6][6];
 			Random myRandom = new Random();
 			RoomGenerator rg = new RoomGenerator();
+			MapGenerator mg = new MapGenerator();
 			FileWriter fw = new FileWriter(path, false);
-			PrintWriter pw = new PrintWriter(fw);
-			pw.printf("36\n12\n");				
-			
-			int[][] Room1 = rg.generateRoom(2, 2);
-			int[][] Room2 = rg.generateRoom(8, 2);
-			int[][] Room3 = rg.generateRoom(9, 2);
-			
-			for(int i = 1;i<=12;i++) {
 				
-				for(int j = 1; j<=12;j++){
-					
-					pw.print(Room1[i][j]+" ");
-					pw.print(Room2[i][j]+" ");
-					pw.print(Room3[i][j]+" ");
+			int[][] mapArray = new int[96][96];
+			
+			StringBuilder[] sb = new StringBuilder[96];
+			int f = sb.length;
+			while (--f >= 0){
+				sb[f]= new StringBuilder();
+			}
+			
+			map = mg.generatePath();
+			
+			for(int h = 0; h<=5; h++){
+				
+			int[][] theRoom1 = rg.generateRoom(map[0][h]);
+			int[][] theRoom2 = rg.generateRoom(map[1][h]);
+			int[][] theRoom3 = rg.generateRoom(map[2][h]);
+			int[][] theRoom4 = rg.generateRoom(map[3][h]);
+			int[][] theRoom5= rg.generateRoom(map[4][h]);
+			int[][] theRoom6 = rg.generateRoom(map[5][h]);
+						
+				for(int i = 0; i<=15; i++){
+					System.err.println("room 1 "+Arrays.toString(theRoom1[i]));
+					for(int j = 0; j<= 15; j++){
+															
+					mapArray[i][j+(h*16)] = theRoom1[i][j];
+							
+					}
 					
 				}
 				
-				pw.printf("\n");
+				for(int i = 0; i<=15; i++){
+					System.err.println("room 2 "+Arrays.toString(theRoom2[i]));
+					for(int j = 0; j<= 15; j++){
+															
+					mapArray[i+16][j+(h*16)] = theRoom2[i][j];
+							
+					}
+					
+				}
+				
+				for(int i = 0; i<=15; i++){
+					System.err.println("room 3 "+Arrays.toString(theRoom3[i]));
+					for(int j = 0; j<= 15; j++){
+															
+					mapArray[i+32][j+(h*16)] = theRoom3[i][j];
+							
+					}
+					
+				}
+				
+				for(int i = 0; i<=15; i++){
+					System.err.println("room 4 "+Arrays.toString(theRoom4[i]));
+					for(int j = 0; j<= 15; j++){
+															
+					mapArray[i+48][j+(h*16)] = theRoom4[i][j];
+							
+					}
+					
+				}
+				
+				for(int i = 0; i<=15; i++){
+					System.err.println("room 5 "+Arrays.toString(theRoom5[i]));
+					for(int j = 0; j<= 15; j++){
+															
+					mapArray[i+64][j+(h*16)] = theRoom5[i][j];
+							
+					}
+					
+				}
+				
+				for(int i = 0; i<=15; i++){
+					System.err.println("room 6 "+Arrays.toString(theRoom6[i]));
+					for(int j = 0; j<= 15; j++){
+															
+					mapArray[i+80][j+(h*16)] = theRoom6[i][j];
+							
+					}
+					
+				}
+			
+		}
+			
+			PrintWriter pw = new PrintWriter(fw);
+			pw.printf("96\n96\n");
+			
+			for(int k = 0; k<96; k++){
+				
+				for(int m = 0; m<96; m++){
+				
+				pw.print(mapArray[k][m]+" ");
+				System.out.print(mapArray[k][m]+" ");
+				
+				}
+				
+				pw.println();
+				System.out.println();
 				
 			}
 			
