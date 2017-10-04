@@ -18,7 +18,7 @@ public class Player {
 	private boolean rightHeld = false, leftHeld = false;
 	
 	public double x,y;
-	public int width = 32,height = 64;
+	public int width = 32,height = 32;
 	
 	// jump speed
 	private final double jumpSpeed = 8;
