@@ -25,7 +25,7 @@ public class Player {
 	private double currentJumpSpeed = jumpSpeed;
 	
 	// move speed
-	private final double moveSpeed = 4;
+	private final double moveSpeed = 8;
 	
 	// fall speed
 	private final double maxFallSpeed = 10;
