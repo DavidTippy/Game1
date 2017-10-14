@@ -37,11 +37,13 @@ public class RoomGenerator {
 			counter++;
 		
 		StringBuilder name = new StringBuilder();
-		name.append("Room").append(roomType).append(counter).append(".room");
+		name.append("/Room").append(roomType).append(counter).append(".room");
 		
 		stream = getClass().getResourceAsStream(name.toString());		
 		
 		} while (stream != null);
+		
+		counter--;
 		
 		Random myRandom = new Random();
 		int roomNumber = myRandom.nextInt(counter)+1;
@@ -78,6 +80,10 @@ public class RoomGenerator {
 				}
 			 
 			}
+			
+		} else {
+			
+			throw new UnsupportedOperationException();
 			
 		} 
 		
