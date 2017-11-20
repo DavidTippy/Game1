@@ -7,7 +7,7 @@ import com.javanut.dmt.game1.gamestates.GameState;
 
 public class Block extends Rectangle{
 	
-	public static final int blockSize = 32;
+	public static final int blockSize = 36;
 	
 	private int id;
 	
@@ -39,6 +39,12 @@ public class Block extends Rectangle{
 	public int getID() {
 		
 		return id;
+		
+	}
+	
+	public int getLocationY(){
+		
+		return y;
 		
 	}
 

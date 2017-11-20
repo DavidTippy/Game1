@@ -17,19 +17,22 @@ public class Player {
 	private boolean right = false, left = false, jumping = false, falling = false, bottomCollision = false;
 	private boolean rightHeld = false, leftHeld = false;
 	
-	public double x,y;
+	public final double x,y;
 	public int width = 32,height = 32;
+	
+	private double lastX = 0;
+	private double lastY = 0;
 	
 	// jump speed
 	private final double jumpSpeed = 8;
 	private double currentJumpSpeed = jumpSpeed;
 	
 	// move speed
-	private final double moveSpeed = 8;
+	private double moveSpeed = 9;
 	
 	// fall speed
-	private final double maxFallSpeed = 10;
-	private double currentFallSpeed = 0.2;
+	private final double maxFallSpeed = 20;
+	private double currentFallSpeed = 0;
 	
 	public Player() {
 		
@@ -39,25 +42,6 @@ public class Player {
 	}
 	
 	public void tick( Block[][] b) {
-		
-		//int map[][];
-		
-		//MapGenerator mg = new MapGenerator();
-		//map = mg.generatePath();
-		
-		//for(int i = 0; i<=5; i++){
-			
-			//for(int j = 0;j<=5;j++){
-				
-				
-				
-				//System.out.print(map[i][j]);
-				
-			//}
-			
-			//System.out.printf("\n");
-			
-		//}
 		
 		if(leftHeld) {
 			
@@ -76,133 +60,163 @@ public class Player {
 		
 		//TODO: find exact which block player is in
 		
-		int iLeft = (int)((x+GameState.xOffset-1)/Block.blockSize);
-		int iMiddleLeft = (int)(((x+width/8)+GameState.xOffset)/Block.blockSize);
-		int iMiddle = (int)(((x+width/2)+GameState.xOffset)/Block.blockSize);
-		int iMiddleRight = (int)(((x+width/1.1)+GameState.xOffset)/Block.blockSize);
-		int iRight = (int)(((x+width)+GameState.xOffset+1)/Block.blockSize);
+		int iLeft = (int)((x+GameState.xOffset)/Block.blockSize);
+		int iLeftLeft = (int)((x+GameState.xOffset-moveSpeed)/Block.blockSize);
+		
+		int iRight = (int)(((x+width)+GameState.xOffset)/Block.blockSize);
+		int iRightRight = (int)((x+width+moveSpeed+GameState.xOffset)/Block.blockSize);
 		
 		int jTop = (int)((y+GameState.yOffset)/Block.blockSize);
-		int jMiddleTop =(int)(((y+height/7.5)+GameState.yOffset)/Block.blockSize);
-		int jMiddle = (int)(((y + height/2)+GameState.yOffset)/Block.blockSize);
-		int jMiddleBottom = (int)(((y+height/1.1)+GameState.yOffset)/Block.blockSize);
-		int jBottom = (int)(((y+height+2)+GameState.yOffset)/Block.blockSize);
 		
-		// bottom collision
-		if(iMiddle >= 0 && jBottom >= 0 && jBottom < b.length && iMiddle<b[jBottom].length) {
-		
-			if(b[jBottom][iMiddle].getID() != 0){falling = false; bottomCollision = true;}}
+		int jBottom = (int)(((y+height)+GameState.yOffset)/Block.blockSize);
+		int jBottomBottom = (int)((y+height+currentFallSpeed+GameState.yOffset)/Block.blockSize);
 		
 		// bottom left collision
-		if(iMiddleLeft >= 0 && jBottom >= 0 && jBottom < b.length && iMiddleLeft<b[jBottom].length) {
+		if (iLeft >= 0 && jBottomBottom >= 0 && jBottomBottom < b.length && iLeft < b[jBottomBottom].length) {
+
+			if (b[jBottomBottom][iLeft].getID() != 0) {
+				falling = false;
+				bottomCollision = true;
 				
-			if(b[jBottom][iMiddleLeft].getID() != 0){falling = false; bottomCollision = true;}}
-				
+			}
+		
+		}
+
 		// bottom right collision
-		if(iMiddleRight >= 0 && jBottom >= 0 && jBottom < b.length && iMiddleRight<b[jBottom].length) {
+		if (iRight >= 0 && jBottomBottom >= 0 && jBottomBottom < b.length && iRight < b[jBottomBottom].length) {
+			
+			if (b[jBottomBottom][iRight].getID() != 0) {
+				falling = false;
+				bottomCollision = true;
 				
-			if(b[jBottom][iMiddleRight].getID() != 0){falling = false; bottomCollision = true;}}
-		
-		// top collision
-		if(iMiddle >= 0 && jTop >= 0 && jTop < b.length && iMiddle<b[jTop].length) {
-		
-			if(b[jTop][iMiddle].getID() != 0) {jumping = false; falling = true;}}
-		
-		// top left collision
-		if(iMiddleLeft >= 0 && jTop >= 0 && jTop < b.length && iMiddleLeft<b[jTop].length) {
-		
-			if(b[jTop][iMiddleLeft].getID() != 0) {jumping = false; falling = true;}}
-		
-		// top right collision
-		if(iMiddleRight >= 0 && jTop >= 0 && jTop < b.length && iMiddleRight<b[jTop].length) {
-		
-			if(b[jTop][iMiddleRight].getID() != 0) {jumping = false; falling = true;}}
-		
-		// left collision
-		if(iLeft >= 0 && jMiddle >= 0 && jMiddle < b.length && iLeft<b[jMiddle].length) {
-			
-			if(b[jMiddle][iLeft].getID() != 0){left = false;}}
-		
-		// left bottom collision
-		
-		if(iLeft >= 0 && jMiddleBottom >= 0 && jMiddleBottom < b.length && iLeft<b[jMiddleBottom].length) {
-			
-			if(b[jMiddleBottom][iLeft].getID() != 0){left = false;}}
-		
-		// left top collision
-		if(iLeft >= 0 && jMiddleTop >= 0 && jMiddleTop < b.length && iLeft<b[jMiddleTop].length) {
-					
-			if(b[jMiddleTop][iLeft].getID() != 0){left = false;}}
-			
-		// right collision
-		if(iRight >= 0 &&  jMiddle >= 0 && jMiddle < b.length && iRight < b[jMiddle].length) {
-			
-			if(b[jMiddle][iRight].getID() != 0){right = false;}}	
-		
-		// right bottom collision
-		if(iRight >= 0 &&  jMiddleBottom >= 0 && jMiddleBottom < b.length && iRight < b[jMiddleBottom].length) {
-					
-			if(b[jMiddleBottom][iRight].getID() != 0){right = false;}}
-				
-		// right top collision
-		if(iRight >= 0 &&  jMiddleTop >= 0 && jMiddleTop < b.length && iRight < b[jMiddleTop].length) {
-					
-			if(b[jMiddleTop][iRight].getID() != 0){right = false;}}
-
-				if(!bottomCollision && !jumping) {
-					
-					falling = true;
-					
-
-				}					
-		
-		bottomCollision = false;
-		
-		if (right) {						
-			
-			GameState.xOffset += moveSpeed;			
-			
+			}
 		}
-		
-		if (left) {
-			
-			GameState.xOffset -= moveSpeed;
-			
-		}
-		
-		if(jumping) {
-			
-			GameState.yOffset -= currentJumpSpeed;
-			
-			currentJumpSpeed -= .2;
-			
-			if(currentJumpSpeed <= 0) {
-				
-				currentJumpSpeed = jumpSpeed;
+
+		//top left collision
+		if (iLeft >= 0 && jTop >= 0 && jTop < b.length && iLeft < b[jTop].length) {
+
+			if (b[jTop][iLeft].getID() != 0) {
 				jumping = false;
-				falling = true;
-				
-			}			
-			
+			}
+		}
+
+		//top right collision
+		if (iRight >= 0 && jTop >= 0 && jTop < b.length && iRight < b[jTop].length) {
+
+			if (b[jTop][iRight].getID() != 0) {
+				jumping = false;
+			}
 		}
 		
-		if(falling) {
+		//bottom right right collision
+		if(iRightRight >= 0 && jBottom >= 0 && jBottom < b.length && iRightRight < b[jBottom].length) {
 			
-			GameState.yOffset += currentFallSpeed;
-			
-			if(currentFallSpeed < maxFallSpeed) {
+			if(b[jBottom][iRightRight].getID() != 0){
 				
-				currentFallSpeed += .2;
+				//moveSpeed = 7;
+				
+				
+				
+				right = false;
 				
 			}
 			
 		}
 		
-		if(!falling) {
+		// top right right collision
+		if(iRightRight >= 0 && jTop >= 0 && jTop < b.length && iRightRight < b[jTop].length) {
 			
-			currentFallSpeed = .2;
+			if(b[jTop][iRightRight].getID() != 0){
+				
+				//moveSpeed = 7;
+				right = false;
+				
+			}
 			
+		}
+		
+		//bottom left left collision
+		if(iLeftLeft >= 0 && jBottom >= 0 && jBottom < b.length && iLeftLeft < b[jBottom].length) {
+			
+			if(b[jBottom][iLeftLeft].getID() != 0){
+				
+				//moveSpeed = 7;
+				left = false;
+				
+			}
+			
+		}
+		
+		// top left left collision
+		if(iLeftLeft >= 0 && jTop >= 0 && jTop < b.length && iLeftLeft < b[jTop].length) {
+			
+			if(b[jTop][iLeftLeft].getID() != 0){				
+				
+				//moveSpeed = 7;
+				left = false;
+				
+			}
+			
+		}
+		
+		if (!bottomCollision && !jumping) {
+
+			falling = true;
+
+		}
+
+		bottomCollision = false;
+
+		if (right) {
+
+			GameState.xOffset += moveSpeed;
+			
+			}
+
+		
+
+		if (left) {
+
+			GameState.xOffset -= moveSpeed;
+
+		}
+
+		if (jumping) {
+
+			GameState.yOffset -= currentJumpSpeed;
+
+			currentJumpSpeed -= .2;
+
+			if (currentJumpSpeed <= 0) {
+
+				currentJumpSpeed = jumpSpeed;
+				jumping = false;
+				falling = true;
+
+			}
+
+		}
+
+		if (falling) {
+
+			GameState.yOffset += currentFallSpeed;
+
+			if (currentFallSpeed < maxFallSpeed) {
+
+				currentFallSpeed += .5;
+
+			}
+
+		}
+
+		if (!falling) {
+
+			currentFallSpeed = 0;
+
 		}	
+		
+		lastX = GameState.xOffset;
+		lastY = GameState.yOffset;
 		
 	}
 		
@@ -219,7 +233,7 @@ public class Player {
 		
 		if(i == KeyEvent.VK_RIGHT) {rightHeld = true;}
 		if(i == KeyEvent.VK_LEFT) {leftHeld = true;}
-		if(i == KeyEvent.VK_Z && !jumping && !falling) jumping = true;
+		if(i == KeyEvent.VK_Z && !jumping) {jumping = true;}
 		
 	}
 	
