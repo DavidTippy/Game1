@@ -7,13 +7,13 @@ import com.javanut.dmt.game1.entities.Player;
 import com.javanut.dmt.game1.mapping.Map;
 import com.javanut.dmt.game1.solids.Block;
 
-public class Level1State extends GameState{
+public class LevelState extends GameState{
 	
 	private Player player;
 	private Map map;
 
 
-	public Level1State(GameStateManager gsm) {
+	public LevelState(GameStateManager gsm) {
 		
 		super(gsm);
 		

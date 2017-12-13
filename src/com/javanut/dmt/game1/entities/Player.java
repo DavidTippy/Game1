@@ -28,7 +28,8 @@ public class Player {
 	private double currentJumpSpeed = jumpSpeed;
 	
 	// move speed
-	private double moveSpeed = 9;
+	private double maxMoveSpeed = 9;
+	private double currentMoveSpeed = 1;
 	
 	// fall speed
 	private final double maxFallSpeed = 20;
@@ -61,10 +62,10 @@ public class Player {
 		//TODO: find exact which block player is in
 		
 		int iLeft = (int)((x+GameState.xOffset)/Block.blockSize);
-		int iLeftLeft = (int)((x+GameState.xOffset-moveSpeed)/Block.blockSize);
+		int iLeftLeft = (int)((x+GameState.xOffset-currentMoveSpeed)/Block.blockSize);
 		
 		int iRight = (int)(((x+width)+GameState.xOffset)/Block.blockSize);
-		int iRightRight = (int)((x+width+moveSpeed+GameState.xOffset)/Block.blockSize);
+		int iRightRight = (int)((x+width+currentMoveSpeed+GameState.xOffset)/Block.blockSize);
 		
 		int jTop = (int)((y+GameState.yOffset)/Block.blockSize);
 		
@@ -113,11 +114,16 @@ public class Player {
 			
 			if(b[jBottom][iRightRight].getID() != 0){
 				
-				//moveSpeed = 7;
+			
+				
+				if(right){
+
+					
+					right = false;
+					
+				}
 				
 				
-				
-				right = false;
 				
 			}
 			
@@ -128,8 +134,12 @@ public class Player {
 			
 			if(b[jTop][iRightRight].getID() != 0){
 				
-				//moveSpeed = 7;
-				right = false;
+				if(right){
+		
+					
+					right = false;
+					
+				}
 				
 			}
 			
@@ -140,7 +150,7 @@ public class Player {
 			
 			if(b[jBottom][iLeftLeft].getID() != 0){
 				
-				//moveSpeed = 7;
+				
 				left = false;
 				
 			}
@@ -152,7 +162,7 @@ public class Player {
 			
 			if(b[jTop][iLeftLeft].getID() != 0){				
 				
-				//moveSpeed = 7;
+				
 				left = false;
 				
 			}
@@ -169,17 +179,23 @@ public class Player {
 
 		if (right) {
 
-			GameState.xOffset += moveSpeed;
+			GameState.xOffset += currentMoveSpeed;
 			
-			}
+			currentMoveSpeed = maxMoveSpeed;
+			
+			} else {
 
 		
 
 		if (left) {
 
-			GameState.xOffset -= moveSpeed;
+			GameState.xOffset -= currentMoveSpeed;
+			
+			currentMoveSpeed = maxMoveSpeed;
 
-		}
+		} else {currentMoveSpeed = 1;}
+		
+			}
 
 		if (jumping) {
 

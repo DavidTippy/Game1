@@ -124,7 +124,7 @@ public class MapState extends GameState{
 				
 				if(curSelX == 0) {
 					
-					gsm.states.push(new Level1State(gsm));
+					gsm.states.push(new LevelState(gsm));
 					
 				}
 				

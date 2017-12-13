@@ -47,5 +47,11 @@ public class Block extends Rectangle{
 		return y;
 		
 	}
+	
+	public int getLocationX(){
+		
+		return x;
+		
+	}
 
 }
